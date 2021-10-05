@@ -23,12 +23,17 @@ export default {
 }
 
 * {
+
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   color: #2c3e50;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
+}
+
+body {
+  background-color: rgb(159, 202, 226);
 
 }
 

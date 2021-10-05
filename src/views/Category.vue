@@ -1,6 +1,8 @@
 <template>
-  <div v-bind:key="category._id" v-for="category in categories">
-    <TipCard :tip="category" />
+  <div class="container">
+    <div v-bind:key="category._id" v-for="category in categories">
+      <TipCard :tip="category" />
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
     async fetchTopics(category) {
       try {
         const res = await fetch(
-          `http://localhost:5000/cheatsheets/${category}`
+          `http://localhost:5910/cheatsheets/${category}`
         );
         const json = await res.json();
         // console.log(json);
@@ -36,3 +38,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  display: block;
+}
+
+@media screen and (min-width: 480px) {
+}
+.container {
+  display: flex;
+}
+</style>

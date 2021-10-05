@@ -1,12 +1,12 @@
 <template>
   <main>
-    <ul>
-      <li v-bind:key="collection.id" v-for="collection in collections">
-        <div class="collection-container">
-          <h1><span class="collection" @click="gotoTopic(collection.name)">{{ collection.name }}</span></h1>
-        </div>
-      </li>
-    </ul>
+    <div v-bind:key="collection.id" v-for="collection in collections">
+      <div class="collection-container">
+        <span @click="gotoTopic(collection.name)">
+          {{ collection.name }}
+        </span>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   methods: {
     async fetchTopics() {
       try {
-        const res = await fetch("http://localhost:5000/cheatsheets");
+        const res = await fetch(`http://localhost:5910/cheatsheets`);
         const json = await res.json();
         // console.log(json);
         return json;
@@ -31,30 +31,37 @@ export default {
         console.log(e);
       }
     },
-    gotoTopic(collection){
+    gotoTopic(collection) {
       const path = `/category/${collection}`;
       // console.log(path);
       this.$router.push({
-        path: path
+        path: path,
       });
-    }
+    },
   },
   async created() {
     this.collections = await this.fetchTopics();
-  }
+  },
 };
 </script>
 
-<style>
-main ul li h1 {
+<style scoped>
+
+
+main .collection-container h2 {
   text-transform: capitalize;
 }
-.collection {
-  margin: .5em 1em;
-  cursor: pointer;
-  background-color: darkgray;
-}
+
 .collection-container {
-  margin: .5em 1em;
+  cursor: pointer;
+  width: 200px;
+  margin: 0em auto;
+  padding: 1em 0em;
+}
+
+.collection-container span {
+  padding: .5em;
+  background-color: rgb(88, 152, 236);
+  border-radius: 15px;
 }
 </style>
